@@ -35,7 +35,9 @@ export function TransactionFeed({ events }: TransactionFeedProps) {
   const recent = events.slice(-8).reverse()
 
   return (
-    <div className='glass rounded-xl p-3 h-full flex flex-col'>
+    <div
+      className='bg-white/[0.03] rounded-sm p-3 h-full flex flex-col'
+      style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
       <h3 className='text-white/40 text-xs font-display uppercase tracking-wider mb-2 shrink-0'>
         Live Feed
       </h3>

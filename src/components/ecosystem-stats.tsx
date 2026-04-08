@@ -17,24 +17,34 @@ export function EcosystemStats({ terrarium, creatures }: EcosystemStatsProps) {
       : 0
 
   return (
-    <div className='glass rounded-xl p-4'>
+    <div
+      className='bg-white/[0.03] rounded-sm p-4'
+      style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
       <h3 className='text-white/40 text-xs font-display uppercase tracking-wider mb-3'>
         Ecosystem
       </h3>
       <div className='grid grid-cols-2 gap-2'>
-        <div className='glass rounded-lg p-2.5'>
+        <div
+          className='bg-white/[0.03] rounded-sm p-2.5'
+          style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
           <div className='text-biolum font-display font-bold text-lg'>{activeCount}</div>
           <div className='text-white/30 text-[10px] font-body'>Active</div>
         </div>
-        <div className='glass rounded-lg p-2.5'>
+        <div
+          className='bg-white/[0.03] rounded-sm p-2.5'
+          style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
           <div className='text-blue-300 font-display font-bold text-lg'>{hibernatingCount}</div>
           <div className='text-white/30 text-[10px] font-body'>Hibernating</div>
         </div>
-        <div className='glass rounded-lg p-2.5'>
+        <div
+          className='bg-white/[0.03] rounded-sm p-2.5'
+          style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
           <div className='text-amber font-display font-bold text-lg'>{totalWealth.toFixed(2)}</div>
           <div className='text-white/30 text-[10px] font-body'>Total Wealth</div>
         </div>
-        <div className='glass rounded-lg p-2.5'>
+        <div
+          className='bg-white/[0.03] rounded-sm p-2.5'
+          style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
           <div className='text-success font-display font-bold text-lg'>{avgEnergy.toFixed(0)}</div>
           <div className='text-white/30 text-[10px] font-body'>Avg Energy</div>
         </div>

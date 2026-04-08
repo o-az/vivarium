@@ -19,7 +19,9 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
   const activeCreatures = creatures.filter(c => c.status === 'active')
 
   return (
-    <div className='glass rounded-xl p-4'>
+    <div
+      className='bg-white/[0.03] rounded-sm p-4'
+      style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
       <h3 className='text-white/40 text-xs font-display uppercase tracking-wider mb-3'>Controls</h3>
 
       <div className='space-y-2'>
@@ -35,14 +37,14 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
               }
             }}
             placeholder='Name (optional)'
-            className='flex-1 min-w-0 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-white/20 font-body focus:outline-none focus:border-biolum/40 transition-colors'
+            className='flex-1 min-w-0 bg-white/5 border border-white/10 rounded-sm px-3 py-2 text-sm text-white placeholder-white/20 font-body focus:outline-none focus:border-biolum/40 transition-colors'
           />
           <button
             onClick={() => {
               onSpawn(spawnName || undefined)
               setSpawnName('')
             }}
-            className='shrink-0 px-5 py-2 rounded-lg text-sm font-display font-semibold whitespace-nowrap transition-all hover:scale-[1.02] active:scale-[0.98]'
+            className='shrink-0 px-5 py-2 rounded-sm text-sm font-display font-semibold whitespace-nowrap transition-all hover:scale-[1.02] active:scale-[0.98]'
             style={{
               background: 'linear-gradient(135deg, rgba(0,255,213,0.15), rgba(0,255,213,0.05))',
               border: '1px solid rgba(0,255,213,0.2)',
@@ -54,7 +56,7 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
 
         <button
           onClick={() => setShowBreed(!showBreed)}
-          className='w-full py-2 px-3 rounded-lg text-sm font-display text-purple-300 transition-all hover:scale-[1.01] active:scale-[0.99]'
+          className='w-full py-2 px-3 rounded-sm text-sm font-display text-purple-300 transition-all hover:scale-[1.01] active:scale-[0.99]'
           style={{
             background: 'rgba(192,132,252,0.06)',
             border: '1px solid rgba(192,132,252,0.15)'
@@ -76,7 +78,7 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
                   <select
                     value={parent1 || ''}
                     onChange={e => setParent1(e.target.value || null)}
-                    className='w-full mt-0.5 bg-void-light border border-white/10 rounded-lg px-2 py-1.5 text-sm text-white font-body focus:outline-none focus:border-purple-400/40'>
+                    className='w-full mt-0.5 bg-void-light border border-white/10 rounded-sm px-2 py-1.5 text-sm text-white font-body focus:outline-none focus:border-purple-400/40'>
                     <option value=''>Select...</option>
                     {activeCreatures.map(c => (
                       <option
@@ -92,7 +94,7 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
                   <select
                     value={parent2 || ''}
                     onChange={e => setParent2(e.target.value || null)}
-                    className='w-full mt-0.5 bg-void-light border border-white/10 rounded-lg px-2 py-1.5 text-sm text-white font-body focus:outline-none focus:border-purple-400/40'>
+                    className='w-full mt-0.5 bg-void-light border border-white/10 rounded-sm px-2 py-1.5 text-sm text-white font-body focus:outline-none focus:border-purple-400/40'>
                     <option value=''>Select...</option>
                     {activeCreatures
                       .filter(c => c.id !== parent1)
@@ -115,7 +117,7 @@ export function ControlPanel({ creatures, onSpawn, onBreed, selectedId }: Contro
                     }
                   }}
                   disabled={!parent1 || !parent2}
-                  className='w-full py-1.5 rounded-lg text-sm font-display font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed'
+                  className='w-full py-1.5 rounded-sm text-sm font-display font-medium transition-all disabled:opacity-30 disabled:cursor-not-allowed'
                   style={{
                     background:
                       'linear-gradient(135deg, rgba(192,132,252,0.15), rgba(192,132,252,0.05))',
