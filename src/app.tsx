@@ -9,6 +9,7 @@ import { EcosystemStats } from '#components/ecosystem-stats.tsx'
 import { CreatureDetail } from '#components/creature-detail.tsx'
 import { TransactionFeed } from '#components/transaction-feed.tsx'
 import { ParticleBackground } from '#components/particle-background.tsx'
+import { WalletButton } from '#components/wallet-button.tsx'
 
 function useCreatureUrl() {
   const readCreatureId = React.useCallback(() => {
@@ -224,15 +225,18 @@ export default function App() {
                 Living Digital Ecosystem — Powered by Rivet Actors + MPP
               </p>
             </div>
-            <motion.div
-              className='flex items-center gap-1.5'
-              animate={connected ? { opacity: 1 } : { opacity: [0.5, 1, 0.5] }}
-              transition={connected ? { duration: 0 } : { duration: 2, repeat: Infinity }}>
-              <div className={`w-2 h-2 rounded-full ${!connected ? 'bg-amber' : 'bg-biolum'}`} />
-              <span className='text-xs font-body text-white/30'>
-                {!connected ? 'Connecting...' : 'Live'}
-              </span>
-            </motion.div>
+            <div className='flex items-center gap-4'>
+              <WalletButton />
+              <motion.div
+                className='flex items-center gap-1.5'
+                animate={connected ? { opacity: 1 } : { opacity: [0.5, 1, 0.5] }}
+                transition={connected ? { duration: 0 } : { duration: 2, repeat: Infinity }}>
+                <div className={`w-2 h-2 rounded-full ${!connected ? 'bg-amber' : 'bg-biolum'}`} />
+                <span className='text-xs font-body text-white/30'>
+                  {!connected ? 'Connecting...' : 'Live'}
+                </span>
+              </motion.div>
+            </div>
           </div>
 
           <div className='flex-1 min-h-0 select-none'>
