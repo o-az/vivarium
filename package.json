@@ -1,0 +1,55 @@
+{
+  "name": "vivarium",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "imports": {
+    "#*": "./src/*",
+    "#server/*": "./server/*",
+    "#package.json": "./package.json"
+  },
+  "scripts": {
+    "build": "vite build",
+    "dev:client": "vite",
+    "dev:server": "node --env-file-if-exists='.env' --watch server/index.ts",
+    "dev": "bun --parallel dev:server dev:client",
+    "start": "bun run server/index.ts",
+    "format": "oxfmt --config='oxfmt.config.ts' --write .",
+    "lint": "oxlint --config='oxlint.config.ts' --type-aware --type-check --fix-dangerously .",
+    "check": "bun format && bun lint",
+    "check:types": "bun tsgo --project tsconfig.json --noEmit",
+    "test": "echo 'noop'"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.19.13",
+    "@rivetkit/react": "^2.2.1",
+    "framer-motion": "^12.38.0",
+    "hono": "^4.12.12",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "rivetkit": "^2.2.1"
+  },
+  "devDependencies": {
+    "@hono/zod-validator": "^0.7.6",
+    "@tailwindcss/vite": "^4.2.2",
+    "@taplo/cli": "^0.7.0",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/bun": "^1.3.11",
+    "@types/node": "^25.5.2",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@typescript/native-preview": "^7.0.0-dev.20260407.1",
+    "@vitejs/devtools": "^0.1.13",
+    "@vitejs/plugin-react": "^6.0.1",
+    "oxfmt": "^0.44.0",
+    "oxlint": "^1.59.0",
+    "oxlint-tsgolint": "^0.20.0",
+    "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
+    "typed-query-selector": "^2.12.1",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.7",
+    "zod": "^4.3.6"
+  },
+  "packageManager": "bun@1.3.11"
+}

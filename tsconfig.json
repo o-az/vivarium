@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2024",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "resolvePackageJsonImports": true,
+    "resolvePackageJsonExports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["bun", "node", "typed-query-selector/strict"],
+
+    "paths": {
+      "*": ["./*"],
+      "#*": ["./src/*"],
+      "#server/*": ["./server/*"],
+      "#package.json": ["./package.json"]
+    }
+  },
+  "files": ["vite.config.ts", "reset.d.ts", "env.d.ts"],
+  "include": ["src", "server"],
+  "exclude": ["node_modules", "dist"]
+}
