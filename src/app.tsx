@@ -10,6 +10,31 @@ import { CreatureDetail } from '#components/creature-detail.tsx'
 import { TransactionFeed } from '#components/transaction-feed.tsx'
 import { ParticleBackground } from '#components/particle-background.tsx'
 
+function useCreatureUrl() {
+  const readCreatureId = React.useCallback(() => {
+    const params = new URLSearchParams(window.location.search)
+    return params.get('creature')
+  }, [])
+
+  const setCreatureId = React.useCallback((id: string | null) => {
+    const url = new URL(window.location.href)
+    if (id) {
+      url.searchParams.set('creature', id)
+    } else {
+      url.searchParams.delete('creature')
+    }
+    window.history.replaceState(null, '', url.toString())
+  }, [])
+
+  const shareUrl = React.useCallback((id: string) => {
+    const url = new URL(window.location.href)
+    url.searchParams.set('creature', id)
+    return url.toString()
+  }, [])
+
+  return { readCreatureId, setCreatureId, shareUrl }
+}
+
 export default function App() {
   const {
     state: terrariumState,
@@ -28,6 +53,8 @@ export default function App() {
   const [creatures, setCreatures] = React.useState<CreatureState[]>([])
   const [selectedId, setSelectedId] = React.useState<string | null>(null)
   const [selectedCreature, setSelectedCreature] = React.useState<CreatureState | null>(null)
+  const { readCreatureId, setCreatureId, shareUrl } = useCreatureUrl()
+  const initialUrlRef = React.useRef(false)
 
   const refreshCreatures = React.useCallback(async () => {
     const states = await fetchCreatureStates()
@@ -55,6 +82,23 @@ export default function App() {
       if (creature) setSelectedCreature(creature)
     }
   }, [creatures, selectedId])
+
+  // Auto-select creature from URL on first load
+  React.useEffect(() => {
+    if (initialUrlRef.current || creatures.length === 0) return
+    initialUrlRef.current = true
+    const urlId = readCreatureId()
+    if (urlId && creatures.some(c => c.id === urlId)) {
+      setSelectedId(urlId)
+      setSelectedCreature(creatures.find(c => c.id === urlId) ?? null)
+    }
+  }, [creatures, readCreatureId])
+
+  // Sync URL when selection changes (skip initial mount before URL read)
+  React.useEffect(() => {
+    if (!initialUrlRef.current) return
+    setCreatureId(selectedId)
+  }, [selectedId, setCreatureId])
 
   const handleSelect = (id: string) => {
     if (selectedId === id) {
@@ -162,6 +206,7 @@ export default function App() {
                   onWork={handleWork}
                   onRevive={handleRevive}
                   onClose={handleCloseDetail}
+                  shareUrl={selectedId ? shareUrl(selectedId) : undefined}
                 />
               </div>
             </motion.div>

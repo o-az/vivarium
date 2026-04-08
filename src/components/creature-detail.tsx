@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import type { CreatureState } from '#schema.ts'
@@ -10,6 +11,7 @@ interface CreatureDetailProps {
   onWork: () => void
   onRevive: () => void
   onClose: () => void
+  shareUrl?: string
 }
 
 function StatBar({
@@ -49,8 +51,19 @@ export function CreatureDetail({
   onTrain,
   onWork,
   onRevive,
-  onClose
+  onClose,
+  shareUrl
 }: CreatureDetailProps) {
+  const [copied, setCopied] = React.useState(false)
+
+  const handleShare = React.useCallback(() => {
+    if (!shareUrl) return
+    void navigator.clipboard.writeText(shareUrl).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }, [shareUrl])
+
   if (!creature) return null
 
   const hue = creature.hue
@@ -91,11 +104,21 @@ export function CreatureDetail({
               <span className='text-white/30 text-xs font-body'>Gen {creature.generation}</span>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className='text-white/30 hover:text-white/60 transition-colors text-lg'>
-            ✕
-          </button>
+          <div className='flex items-center gap-2'>
+            {shareUrl && (
+              <button
+                onClick={handleShare}
+                className='text-white/30 hover:text-white/60 transition-colors text-sm'
+                title='Copy share link'>
+                {copied ? '✓' : '🔗'}
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className='text-white/30 hover:text-white/60 transition-colors text-lg'>
+              ✕
+            </button>
+          </div>
         </div>
       </div>
 
